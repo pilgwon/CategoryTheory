@@ -5,41 +5,41 @@
 
 ## 목차
 ### 파트 1
-1.  [미번역] [Category: The Essence of Composition](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/) 
-2.  [미번역] [Types and Functions](https://bartoszmilewski.com/2014/11/24/types-and-functions/) 
-3.  [미번역] [Categories Great and Small](https://bartoszmilewski.com/2014/12/05/categories-great-and-small/) 
-4.  [미번역] [Kleisli Categories](https://bartoszmilewski.com/2014/12/23/kleisli-categories/) 
-5.  [미번역] [Products and Coproducts](https://bartoszmilewski.com/2015/01/07/products-and-coproducts/) 
-6.  [미번역] [Simple Algebraic Data Types](https://bartoszmilewski.com/2015/01/13/simple-algebraic-data-types/) 
-7.  [미번역] [Functors](https://bartoszmilewski.com/2015/01/20/functors/) 
-8.  [미번역] [Functoriality](https://bartoszmilewski.com/2015/02/03/functoriality/) 
-9.  [미번역] [Function Types](https://bartoszmilewski.com/2015/03/13/function-types/) 
-10.  [미번역] [Natural Transformations](https://bartoszmilewski.com/2015/04/07/natural-transformations/) 
+1.  [미번역] [합성(Composition)의 정수, 카테고리](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/)
+2.  [미번역] [함수와 타입](https://bartoszmilewski.com/2014/11/24/types-and-functions/)
+3.  [미번역] [다양한 종류의 카테고리들](https://bartoszmilewski.com/2014/12/05/categories-great-and-small/)
+4.  [미번역] [Kleisli 카테고리](https://bartoszmilewski.com/2014/12/23/kleisli-categories/)
+5.  [미번역] [Product와 Coproduct](https://bartoszmilewski.com/2015/01/07/products-and-coproducts/)
+6.  [미번역] [간단한 대수적 데이터 타입들](https://bartoszmilewski.com/2015/01/13/simple-algebraic-data-types/)
+7.  [미번역] [함자(Functors)](https://bartoszmilewski.com/2015/01/20/functors/)
+8.  [미번역] [함자성(Functoriality)](https://bartoszmilewski.com/2015/02/03/functoriality/)
+9.  [미번역] [함수의 종류](https://bartoszmilewski.com/2015/03/13/function-types/)
+10.  [미번역] [자연 변환](https://bartoszmilewski.com/2015/04/07/natural-transformations/)
 
 ### 파트 2
-1. [미번역] [Declarative Programming](https://bartoszmilewski.com/2015/04/15/category-theory-and-declarative-programming/) 
-2. [미번역] [Limits and Colimits](https://bartoszmilewski.com/2015/04/15/limits-and-colimits/) 
-3. [미번역] [Free Monoids](https://bartoszmilewski.com/2015/07/21/free-monoids/) 
-4. [미번역] [Representable Functors](https://bartoszmilewski.com/2015/07/29/representable-functors/) 
-5. [미번역] [The Yoneda Lemma](https://bartoszmilewski.com/2015/09/01/the-yoneda-lemma/) 
-6. [미번역] [Yoneda Embedding](https://bartoszmilewski.com/2015/10/28/yoneda-embedding/) 
+1. [미번역] [선언형 프로그래밍](https://bartoszmilewski.com/2015/04/15/category-theory-and-declarative-programming/)
+2. [미번역] [Limit과 Colimit](https://bartoszmilewski.com/2015/04/15/limits-and-colimits/)
+3. [미번역] [자유 모노이드(Monoid)](https://bartoszmilewski.com/2015/07/21/free-monoids/)
+4. [미번역] [표현 가능 함자](https://bartoszmilewski.com/2015/07/29/representable-functors/)
+5. [미번역] [요네다 보조정리(lemma)](https://bartoszmilewski.com/2015/09/01/the-yoneda-lemma/)
+6. [미번역] [요네다 매장(Embedding)](https://bartoszmilewski.com/2015/10/28/yoneda-embedding/)
 
 ### 파트 3
-1. [미번역] [It’s All About Morphisms](https://bartoszmilewski.com/2015/11/17/its-all-about-morphisms/)
+1. [미번역] [사상(Morphism)에 관한 모든 것](https://bartoszmilewski.com/2015/11/17/its-all-about-morphisms/)
 2. [미번역] [Adjunctions](https://bartoszmilewski.com/2016/04/18/adjunctions/)
-3. [미번역] [Free/Forgetful Adjunctions](https://bartoszmilewski.com/2016/06/15/freeforgetful-adjunctions/)
-4. [미번역] [Monads: Programmer’s Definition](https://bartoszmilewski.com/2016/11/21/monads-programmers-definition/)
-5. [미번역] [Monads and Effects](https://bartoszmilewski.com/2016/11/30/monads-and-effects/)
-6. [미번역] [Monads Categorically](https://bartoszmilewski.com/2016/12/27/monads-categorically/)
-7. [미번역] [Comonads](https://bartoszmilewski.com/2017/01/02/comonads/)
+3. [미번역] [자유 Adjunction과 잊기 쉬운 Adjunction과](https://bartoszmilewski.com/2016/06/15/freeforgetful-adjunctions/)
+4. [미번역] [프로그래머가 정의하는 모나드(Monad)](https://bartoszmilewski.com/2016/11/21/monads-programmers-definition/)
+5. [미번역] [모나드와 효과](https://bartoszmilewski.com/2016/11/30/monads-and-effects/)
+6. [미번역] [카테고리스러운 모나드](https://bartoszmilewski.com/2016/12/27/monads-categorically/)
+7. [미번역] [코모나드(Comonads)](https://bartoszmilewski.com/2017/01/02/comonads/)
 8. [미번역] [F-Algebras](https://bartoszmilewski.com/2017/02/28/f-algebras/)
-9. [미번역] [Algebras for Monads](https://bartoszmilewski.com/2017/03/14/algebras-for-monads/)
-10. [미번역] [Ends and Coends](https://bartoszmilewski.com/2017/03/29/ends-and-coends/)
-11. [미번역] [Kan Extensions](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
-12. [미번역] [Enriched Categories](https://bartoszmilewski.com/2017/05/13/enriched-categories/)
+9. [미번역] [모나드를 위한 대수학(Algebra)](https://bartoszmilewski.com/2017/03/14/algebras-for-monads/)
+10. [미번역] [End와 Coend](https://bartoszmilewski.com/2017/03/29/ends-and-coends/)
+11. [미번역] [칸 확대(Kan Extension)](https://bartoszmilewski.com/2017/04/17/kan-extensions/)
+12. [미번역] [강화된(Enriched) 카테고리](https://bartoszmilewski.com/2017/05/13/enriched-categories/)
 13. [미번역] [Topoi](https://bartoszmilewski.com/2017/07/22/topoi/)
-14. [미번역] [Lawvere Theories](https://bartoszmilewski.com/2017/08/26/lawvere-theories/)
-15. [미번역] [Monads, Monoids, and Categories](https://bartoszmilewski.com/2017/09/06/monads-monoids-and-categories/)
+14. [미번역] [로비어 이론(Lawvere Theory)](https://bartoszmilewski.com/2017/08/26/lawvere-theories/)
+15. [미번역] [모나드, 모노이드 그리고 카테고리](https://bartoszmilewski.com/2017/09/06/monads-monoids-and-categories/)
 
 There is a free  [pdf version](https://github.com/hmemcpy/milewski-ctfp-pdf/)  of this book with nicer typesetting available for download. You may order a hard-cover version with color illustrations at  [Blurb](http://www.blurb.com/b/9008339-category-theory-for-programmers) . Or you may watch me  [teaching this material](https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_)  to a live audience.
 
@@ -80,3 +80,6 @@ Changes in hardware and the growing complexity of software are forcing us to ret
 
 다음글: [Category: The Essence of Composition](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/)
 
+---
+
+공부 목적으로 번역을 하고 있습니다! 잘못된 점에 대한 이슈나 PR은 언제든지 환영합니다 :)
