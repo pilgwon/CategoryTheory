@@ -162,7 +162,7 @@ And, frankly, they should, because we’ve done all this based on very flimsy th
 
 <p align="center">
 	<img src="img/img_preface_2.jpg" width="225" />
-  <span>Ad hoc measures preventing the Beauvais cathedral from collapsing</span>
+  <p>Ad hoc measures preventing the Beauvais cathedral from collapsing</p>
 </p>
 
 다음글: [Category: The Essence of Composition](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/)
