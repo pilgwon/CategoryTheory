@@ -64,43 +64,15 @@
 하지만 하스켈에 대한 고민을 내려놓지는 않아야 합니다. 하스켈 프로그래머가 될 필요는 없지만 적어도 C++로 구현할 아이디어를 스케치하고 문서화하기 위한 언어정도로는 알아야 합니다. 이게 제가 하스켈을 시작한 이유입니다. 간결한 문법과 강력한 타입 시스템이 C++ 템플릿과 데이터 구조, 알고리즘을 구현하고 이해하는데에 아주 많은 도움을 받았습니다. 그렇지만 독자들이 하스켈을 이미 알고있을거란 가정은 하지 않습니다. 저는 최대한 천천히 제가 아는 모든 것을 설명할 것입니다.
 
 
-If you’re an experienced programmer, you might be asking yourself: I’ve been coding for so long without worrying about category theory or functional methods, so what’s changed?
-
-Surely you can’t help but notice that there’s been a steady stream of new functional features invading imperative languages.
-
-Even Java, the bastion of object-oriented programming, let the lambdas in C++ has recently been evolving at a frantic pace — a new standard every few years — trying to catch up with the changing world.
-
-All this activity is in preparation for a disruptive change or, as we physicist call it, a phase transition.
-
-If you keep heating water, it will eventually start boiling.
-
-We are now in the position of a frog that must decide if it should continue swimming in increasingly hot water, or start looking for some alternatives.
+여러분이 경험이 있는 프로그래머라면 이런 궁금증이 생길 수 있습니다. "나는 오랫동안 카테고리 이론이나 함수형 메소드에 대해 고민하지 않고 개발해왔는데 뭐가 더 좋아지는거지?" 물론 도움이 안 될 수도 있지만 새로운 함수형 기능들이 명령형 언어를 침범하는 꾸준한 흐름이 있습니다. 심지어 객체 지향 프로그래밍의 최후의 보루인 자바에서도 최근에 C++의 람다가 제정신이 아닌 속도로 발전하고 있습니다. 빠르게 바뀌는 세상을 따라잡으세요. 이 모든 활동들은 파괴적인 변화에 대한 준비라고 생각합니다. 물리학자들이 사용하는 용어로는 상전이(Phase Transition)라고 합니다. 물에 꾸준히 열이 가해진다면 결국에는 끓을 것입니다. 우리는 지금 수온이 올라가고 있는 물에서 계속 헤엄칠지 아니면 다른 대안을 찾을지를 결정하는 중인 개구리와 같습니다.
 
 <p align="center">
 	<img src="img/img_preface_1.jpg" width="300" />
 </p>
 
+이러한 큰 변화를 이끌어 가는 주된 요소 중 하나는 멀티 코어 혁신입니다. 지금 우세한 프로그래밍 패러다임인 객체 지향 프로그래밍은 동시성(concurrency)과 평행성(parallelism)의 세상에서 여러분에게 아무것도 제공하지 않고 그 대신에 위험하고 결함이 있는 디자인을 제공합니다. 객체 지향의 기본 전제 중 하나인 데이터 숨김(Data Hiding)은 데이터 경쟁의 레시피가 되었습니다. 데이터로 뮤텍스(mutex)를 조합하는 아이디어는 좋지만 불행하게도 락(lock)은 합쳐지지 않고 락을 숨기는 것은 데드락을 만들어서 디버그를 더 어렵게 만듭니다.
 
-One of the forces that are driving the big change is the multicore revolution.
-
-The prevailing programming paradigm, object oriented programming, doesn’t buy you anything in the realm of concurrency and parallelism, and instead encourages dangerous and buggy design.
-
-Data hiding, the basic premise of object orientation, when combined with sharing and mutation, becomes a recipe for data races.
-
-The idea of combining a mutex with the data it protects is nice but, unfortunately, locks don’t compose, and lock hiding makes deadlocks more likely and harder to debug.
-
-
-But even in the absence of concurrency, the growing complexity of software systems is testing the limits of scalability of the imperative paradigm.
-
-To put it simply, side effects are getting out of hand. Granted, functions that have side effects are often convenient and easy to write.
-
-Their effects can in principle be encoded in their names and in the comments. A function called SetPassword or WriteFile is obviously mutating some state and generating side effects, and we are used to dealing with that.
-
-It’s only when we start composing functions that have side effects on top of other functions that have side effects, and so on, that things start getting hairy.
-
-It’s not that side effects are inherently bad — it’s the fact that they are hidden from view that makes them impossible to manage at larger scales.
-
-Side effects don’t scale, and imperative programming is all about side effects.
+그러나 동시성의 부재에도 소프트웨어 시스템의 복잡도는 점점 커지고 명령형 패러다임의 확장성을 테스트하고 있습니다. 쉽게 생각해보면 사이드 이펙트는 프로그래머의 손을 벗어나는 것이 좋습니다. 물론 사이드 이펙트를 가지고 있는 함수는 편하고 작성하기도 쉽습니다. 사이드 이펙트는 원칙적으론 이름과 주석으로 그 효과를 결정합니다. 이름이 SetPassword 또는 WriteFile인 함수는 명백히 어떤 상태를 변경하고 사이드 이펙트를 생성하며 우리가 자주 다뤄오던 것들입니다. 사이드 이펙트가 일어나는 다른 함수 전에 사이드 이펙트가 일어나면 일이 복잡해지기 시작합니다. 그렇지만 사이드 이펙트가 본질적으로 나쁜 것은 아닙니다. 뷰 뒤에 숨겨져있다는 사실이 스케일이 커질수록 더 다루기 힘들게 만듭니다. 사이드 이펙트는 스케일이 달라지지 않고 명령형 프로그래밍은 모든 것이 사이드 이펙트입니다.
 
 
 Changes in hardware and the growing complexity of software are forcing us to rethink the foundations of programming.
