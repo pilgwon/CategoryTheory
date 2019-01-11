@@ -55,18 +55,7 @@
 
 합성(Composition)은 카테고리 이론 정의의 일부이며 이론의 근간이 되는 내용입니다. 저는 합성이 프로그래밍의 정수임을 강력히 주장할 것입니다. 엔지니어들이 서브루틴에 대한 아이디어를 생각하기 전까진 우리는 모든 것을 영원히 합성하고 있었습니다. 구조적 프로그래밍에 대한 규칙이 생긴 후에는 코드 블럭을 재사용할 수 있는 것 덕분에 프로그래밍에는 혁신이 일어났습니다. 그 다음엔 객체 합성에 대한 모든 것을 담은 객체 지향 프로그래밍이 생겨났습니다. 함수형 프로그래밍은 다른 프로그래밍 패러다임과 다르게 함수와 대수학적 데이터 구조뿐만 아니라 겉보기엔 불가능해보이는 것들도 합성할 수 있습니다.
 
-
-Third, I have a secret weapon, a butcher’s knife, with which I will butcher math to make it more palatable to programmers.
-
-When you’re a professional mathematician, you have to be very careful to get all your assumptions straight, qualify every statement properly, and construct all your proofs rigorously.
-
-This makes mathematical papers and books extremely hard to read for an outsider.
-
-I’m a physicist by training, and in physics we made amazing advances using informal reasoning.
-
-Mathematicians laughed at the Dirac delta function, which was made up on the spot by the great physicist P. A. M. Dirac to solve some differential equations.
-
-They stopped laughing when they discovered a completely new branch of calculus called distribution theory that formalized Dirac’s insights.
+세 번째로, 저에겐 비장의 무기인 부쳐스 나이프가 있습니다. 이 칼로 수학을 프로그래머들의 입맛에 맞게 잘라 붙일 것입니다. 혹시 당신이 전문적인 수학자라면 가정을 확실히 해두고 모든 내용이 적절한지 확인하고 모든 증명이 엄밀하게 구성해야 합니다. 이 문서는 외부인들에게 수학 논문과 책들이 엄청 어려워 보이도록 만들 것입니다. 제 전공은 물리학입니다. 물리학에선 비공식적 추론(informal reasoning)을 통해 놀라운 발전이 일어났습니다. 위대한 물리학자인 P. A. M. Dirac이 미분 방정식을 해결하기 위해 만든 Dirac 델타 함수를 보고 수학자들은 다들 웃지만 Dirac의 인사이트가 담겨있는 미적분학의 완전히 새로운 가지인 분포 이론을 발견한 후에는 웃을 수 없을 것입니다.
 
 
 Of course when using hand-waving arguments you run the risk of saying something blatantly wrong, so I will try to make sure that there is solid mathematical theory behind informal arguments in this book.
