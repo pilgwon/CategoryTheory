@@ -58,20 +58,9 @@
 세 번째로, 저에겐 비장의 무기인 부쳐스 나이프가 있습니다. 이 칼로 수학을 프로그래머들의 입맛에 맞게 잘라 붙일 것입니다. 혹시 당신이 전문적인 수학자라면 가정을 확실히 해두고 모든 내용이 적절한지 확인하고 모든 증명이 엄밀하게 구성해야 합니다. 이 문서는 외부인들에게 수학 논문과 책들이 엄청 어려워 보이도록 만들 것입니다. 제 전공은 물리학입니다. 물리학에선 비공식적 추론(informal reasoning)을 통해 놀라운 발전이 일어났습니다. 위대한 물리학자인 P. A. M. Dirac이 미분 방정식을 해결하기 위해 만든 Dirac 델타 함수를 보고 수학자들은 다들 웃지만 Dirac의 인사이트가 담겨있는 미적분학의 완전히 새로운 가지인 분포 이론을 발견한 후에는 웃을 수 없을 것입니다.
 
 
-Of course when using hand-waving arguments you run the risk of saying something blatantly wrong, so I will try to make sure that there is solid mathematical theory behind informal arguments in this book.
+그래서 이 책의 비공식적 논쟁 뒤에는 탄탄한 수학적 이론을 바탕으로 하고자 합니다. 제 침실 탁자에는 Saunders Mac Lane의 _Category Theory for the Working Mathematician_이 있습니다.
 
-I do have a worn-out copy of Saunders Mac Lane’s /Category Theory for the Working Mathematician/ on my nightstand.
-
-
-Since this is category theory /for programmers/ I will illustrate all major concepts using computer code. You are probably aware that functional languages are closer to math than the more popular imperative languages.
-
-They also offer more abstracting power.
-
-So a natural temptation would be to say: You must learn Haskell before the bounty of category theory becomes available to you.
-
-But that would imply that category theory has no application outside of functional programming and that’s simply not true.
-
-So I will provide a lot of C++ examples. Granted, you’ll have to overcome some ugly syntax, the patterns might not stand out from the background of verbosity, and you might be forced to do some copy and paste in lieu of higher abstraction, but that’s just the lot of a C++ programmer.
+이 문서는 _프로그래머를 위한_ 카테고리 이론이기 때문에 모든 주요한 개념을 컴퓨터 코드로 설명하려고 합니다. 그러면 함수형 언어가 유명한 명령형 언어보다 더 수학에 가깝다는 것을 이해하실 수 있을 것입니다. 또한 함수형 언어는 더 추상적인 파워를 제공합니다. 읽다보면 자연스럽게 카테고리 이론의 풍부한 내용을 모두 사용할 수 있기 전에 하스켈을 배워야겠다고 생각하실 수 있습니다. 하지만 그렇게 할 경우 카테고리 이론에는 함수형 프로그래밍 말고는 적용할 곳이 없다고 은연중에 느끼게 될텐데, 그것은 간단히 말하면 사실이 아닙니다. 그래서 저는 C++로 예제를 작성할 예정입니다.  못생긴 문법을 봐야하는 것은 극복해야 겠지만 패턴은 장황한 내용 사이에서 두드러지지 않을 것입니다. 그리고 더 고차원의 추상화에 복붙을 해야하는 경우도 있을 것입니다. 하지만 그건 그저 대부분의 C++ 프로그래머들이 하는 일일뿐입니다.
 
 
 But you’re not off the hook as far as Haskell is concerned.
