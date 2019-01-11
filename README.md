@@ -53,16 +53,7 @@
 
 두번째, 세상에는 아주 많은 종류의 수학이 있고 그들은 모두 다른 대상을 목표로 합니다. 미적분학이나 대수학에 대해 알레르기가 있으실 수도 있지만 그것이 카테고리 이론을 즐길 수 없는 이유가 될 순 없습니다. 저는 카테고리 이론이 프로그래머의 생각 방식에 잘 맞는 수학의 한 종류라는 것까지 주장하고 싶습니다. 그 이유는 카테고리 이론이 개별을 다루는 것보다 구조를 다루는 것에 더 적합하기 때문입니다. 카테고리 이론은 프로그램을 구성이 가능하게 만드는 구조의 종류를 다룹니다.
 
-
-Composition is at the very root of category theory — it’s part of the definition of the category itself.
-
-And I will argue strongly that composition is the essence of programming. We’ve been composing things forever, long before some great engineer came up with the idea of a subroutine.
-
-Some time ago the principles of structured programming revolutionized programming because they made blocks of code composable.
-
-Then came object oriented programming, which is all about composing objects.
-
-Functional programming is not only about composing functions and algebraic data structures — it makes concurrency composable — something that’s virtually impossible with other programming paradigms.
+합성(Composition)은 카테고리 이론 정의의 일부이며 이론의 근간이 되는 내용입니다. 저는 합성이 프로그래밍의 정수임을 강력히 주장할 것입니다. 엔지니어들이 서브루틴에 대한 아이디어를 생각하기 전까진 우리는 모든 것을 영원히 합성하고 있었습니다. 구조적 프로그래밍에 대한 규칙이 생긴 후에는 코드 블럭을 재사용할 수 있는 것 덕분에 프로그래밍에는 혁신이 일어났습니다. 그 다음엔 객체 합성에 대한 모든 것을 담은 객체 지향 프로그래밍이 생겨났습니다. 함수형 프로그래밍은 다른 프로그래밍 패러다임과 다르게 함수와 대수학적 데이터 구조뿐만 아니라 겉보기엔 불가능해보이는 것들도 합성할 수 있습니다.
 
 
 Third, I have a secret weapon, a butcher’s knife, with which I will butcher math to make it more palatable to programmers.
