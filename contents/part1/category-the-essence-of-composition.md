@@ -8,7 +8,7 @@
 A category is an embarrassingly simple concept. A category consists of objects and arrows that go between them. That’s why categories are so easy to represent pictorially. An object can be drawn as a circle or a point, and an arrow… is an arrow. (Just for variety, I will occasionally draw objects as piggies and arrows as fireworks.) But the essence of a category is composition. Or, if you prefer, the essence of composition is a category. Arrows compose, so if you have an arrow from object A to object B, and another arrow from object B to object C, then there must be an arrow — their composition — that goes from A to C.
 
 <p align="center">
-	<img src="img/img_part1-1_1.jpg" width="520" />
+	<img src="/img/img_part1-1_1.jpg" width="520" />
   <p align="center">In a category, if there is an arrow going from A to B and an arrow going from B to C then there must also be a direct arrow from A to C that is their composition. This diagram is not a full category because it’s missing identity morphisms (see later).</p>
 </p>
 
