@@ -1,4 +1,4 @@
-# Category: The Essence of Composition
+# 합성(Composition)의 정수, 카테고리
 원본 사이트: [Category Theory for Programmers](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/)
 
 ---
