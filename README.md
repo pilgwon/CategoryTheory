@@ -5,7 +5,7 @@
 
 ## 목차
 ### 파트 1
-1. \[미번역\] [합성(Composition)의 정수, 카테고리](https://github.com/pilgwon/CategoryTheory/contents/part1-1/contents/part1/category-the-essence-of-composition.md)
+1. \[미번역\] [합성(Composition)의 정수, 카테고리](/contents/part1/category-the-essence-of-composition.md)
 2. \[미번역\] [함수와 타입](https://bartoszmilewski.com/2014/11/24/types-and-functions/)
 3. \[미번역\] [다양한 종류의 카테고리들](https://bartoszmilewski.com/2014/12/05/categories-great-and-small/)
 4. \[미번역\] [Kleisli 카테고리](https://bartoszmilewski.com/2014/12/23/kleisli-categories/)
@@ -82,7 +82,7 @@
   <p align="center">Beauvais 성당이 무너지는 것을 막아주는 지지대</p>
 </p>
 
-다음글: [Category: The Essence of Composition](https://github.com/pilgwon/CategoryTheory/contents/part1-1/contents/part1/category-the-essence-of-composition.md)
+다음글: [Category: The Essence of Composition](/contents/part1/category-the-essence-of-composition.md)
 
 ---
 
