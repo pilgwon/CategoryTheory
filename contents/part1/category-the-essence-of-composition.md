@@ -151,32 +151,32 @@ id . f == f
 
 요약하겠습니다. 카테고리는 객체와 화살표(사상, morphism)으로 이루어져 있습니다. 화살표는 합성될 수 있으며 합성은 결합성을 가집니다. 모든 객체는 합성에서 쓰일 수 있는 유닛을 만드는 항등 화살표를 가집니다.
 
+## 합성은 프로그래밍의 정수입니다
 
-## Composition is the Essence of Programming
+함수형 프로그래머들은 문제에 접근하는 특유의 방식이 있습니다. 그들은 철학적 질문부터 합니다. 예를 들면 인터랙티브 프로그램을 디자인한다고 했을 때 그들은 인터랙션이란 무엇인가? 와 같은 질문을 합니다. Conway의 라이프 게임을 구현할 때도 그들은 아마 라이프의 의미에 대해 곰곰이 생각할 것입니다. 이런 맥락에서 저는 묻고 싶습니다. 프로그래밍이란 무엇일까요? 가장 기본적인 단계로 설명하자면 프로그래밍은 "메모리 주소 x의 컨테츠를 가지고 EAX 레지스터의 컨텐츠에 추가해라" 같이 컴퓨터에게 무엇을 할지 말하는 것입니다. 하지만 어셈블리를 프로그래밍할 때 우리가 컴퓨터에게 전달하는 것은 좀 더 의미적인 표현입니다. 우리는 사소한 문제를 풀고 있는 것입니다. (그게 사소하지 않았다면 컴퓨터가 아니라 다른 것의 도움을 받았겠죠) 우리는 어떻게 문제를 해결하나요? 우리는 큰 문제를 더 작은 문제로 분해합니다. 작은 문제가 여전히 크다면 또 다시 분해하고 이를 반복합니다. 마지막엔 각각의 작은 문제들을 해결할 수 있는 코드를 작성합니다. 그 후엔 프로그래밍의 정수라 할 수 있는 과정을 거칩니다. 우리는 각각의 문제를 해결할 수 있는 코드를 이어붙여서 더 큰 문제를 해결합니다. 여기서 조각을 되돌려 놓을 수 없는데 분해한다는 것은 말이 되지 않습니다.
 
-Functional programmers have a peculiar way of approaching problems. They start by asking very Zen-like questions. For instance, when designing an interactive program, they would ask: What is interaction? When implementing Conway’s Game of Life, they would probably ponder about the meaning of life. In this spirit, I’m going to ask: What is programming? At the most basic level, programming is about telling the computer what to do. “Take the contents of memory address x and add it to the contents of the register EAX.” But even when we program in assembly, the instructions we give the computer are an expression of something more meaningful. We are solving a non-trivial problem (if it were trivial, we wouldn’t need the help of the computer). And how do we solve problems? We decompose bigger problems into smaller problems. If the smaller problems are still too big, we decompose them further, and so on. Finally, we write code that solves all the small problems. And then comes the essence of programming: we compose those pieces of code to create solutions to larger problems. Decomposition wouldn’t make sense if we weren’t able to put the pieces back together.
+계층적인 분해와 재합성의 과정은 컴퓨터가 우리에게 강요하는 것은 아닙니다. 이는 인간이 할 수 있는 생각의 한계를 반영하는 것입니다. 우리의 뇌는 한 번에 적은 수의 개념만 받아들일 수 있습니다. 이와 관련되어 가장 많이 언급되는 심리학 논문은 우리가 생각할 수 있는 정보 청크의 수는 7 ± 2 라는 내용의 [마법의 수 칠, 더하거나 빼기 이(The Magical Number Seven, Plus or Minus Two)](https://ko.wikipedia.org/wiki/마법의_수_칠,_더하거나_빼기_이)입니다. 인간의 단기 기억에 대한 세부 사항은 다를 수 있지만 우리 모두 그게 한정돼있다는 것은 알고 있습니다. 핵심은 우리가 잡탕처럼 섞인 객체 혹은 스파게티처럼 얽힌 코드는 이해하기 어렵다는 것입니다. 한 마디로 프로그램이 보기 좋으라고 구조를 잘 짜는 것이 아닌 우리의 뇌의 효율적인 이해를 위해 구조를 잘 짜야한다는 것입니다. 우리는 종종 어떤 코드를 보고 우아하거나 아름답다고 말하지만 이는 쉽게 말하자면 그냥 한정된 인간의 생각이 잘 처리할 수 있다는 것을 의미합니다. 우아한 코드는 우리의 정신적인 소화 체계가 잘 이해할 수 있도록 적합한 사이즈와 적절한 숫자의 청크를 만듭니다.
 
-This process of hierarchical decomposition and recomposition is not imposed on us by computers. It reflects the limitations of the human mind. Our brains can only deal with a small number of concepts at a time. One of the most cited papers in psychology, [The Magical Number Seven, Plus or Minus Two](http://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two), postulated that we can only keep 7 ± 2 “chunks” of information in our minds. The details of our understanding of the human short-term memory might be changing, but we know for sure that it’s limited. The bottom line is that we are unable to deal with the soup of objects or the spaghetti of code. We need structure not because well-structured programs are pleasant to look at, but because otherwise our brains can’t process them efficiently. We often describe some piece of code as elegant or beautiful, but what we really mean is that it’s easy to process by our limited human minds. Elegant code creates chunks that are just the right size and come in just the right number for our mental digestive system to assimilate them.
+그래서 프로그램 합성의 적절한 청크는 뭘까요? 표면적은 부피가 늘어나는 속도보다 느립니다. (저는 이 비유를 좋아하는데 왜냐하면 기하학적으로 표면은 사이즈의 제곱의 값과 같이 늘어나고, 사이즈의 세제곱 값을 가지는 부피보다는 느리게 늘어나기 때문입니다.) 면적은 청크를 합성하기 위해 알아야할 정보라고 볼 수 있습니다. 그리고 부피는 그것을 구현하기 위해 알아야할 정보라고 볼 수 있습니다. 아이디어는 이렇습니다. 청크가 구현되면 우리는 이것의 구현을 잊고 다른 청크와 어떻게 작동하는지에만 집중할 수 있습니다. 객체 지향 프로그래밍에서는 이 표면이 객체의 클래스 정의 또는 추상 인터페이스입니다. 함수형 프로그래밍에서는 함수의 선언이 표면이 되겠습니다. (많이 생략했지만 요지는 이렇습니다.)
 
-So what are the right chunks for the composition of programs? Their surface area has to increase slower than their volume. (I like this analogy because of the intuition that the surface area of a geometric object grows with the square of its size — slower than the volume, which grows with the cube of its size.) The surface area is the information we need in order to compose chunks. The volume is the information we need in order to implement them. The idea is that, once a chunk is implemented, we can forget about the details of its implementation and concentrate on how it interacts with other chunks. In object-oriented programming, the surface is the class declaration of the object, or its abstract interface. In functional programming, it’s the declaration of a function. (I’m simplifying things a bit, but that’s the gist of it.)
+카테고리 이론은 객체의 내부를 살펴보지 않도록 열심히 막는다는 의미에서 극단적입니다. 카테고리 이론의 객체는 추상적이고 모호한 독립체입니다. 우리가 알 수 있는 것은 오직 화살표를 사용해서 연결되는 다른 객체와의 관계입니다. 이것은 인터넷 검색 엔진이 웹사이트를 들어감과 나감을 통해 랭킹을 매기는 방법과 유사합니다. 객체 지향 프로그래밍에서는 이상화된 객체는 오직 그것의 추상 인터페이스에서만 화살표 역할을 하는 메소드와 함께 볼 수 있습니다. 다른 객체와 합성하는 방식을 이해하기 위해 객체의 구현 방식을 파헤쳐야 하는 순간, 여러분은 여러분의 프로그래밍 패러다임의 이점을 잃게 될 것입니다.
 
-Category theory is extreme in the sense that it actively discourages us from looking inside the objects. An object in category theory is an abstract nebulous entity. All you can ever know about it is how it relates to other object — how it connects with them using arrows. This is how internet search engines rank web sites by analyzing incoming and outgoing links (except when they cheat). In object-oriented programming, an idealized object is only visible through its abstract interface (pure surface, no volume), with methods playing the role of arrows. The moment you have to dig into the implementation of the object in order to understand how to compose it with other objects, you’ve lost the advantages of your programming paradigm.
+## 도전 과제
 
-## Challenges
+1. 가장 좋아하는 언어로 가장 최선의 방법을 사용해서 항등 함수를 작성해보세요. (여러분이 가장 좋아하는 언어가 하스켈이라면 두 번째로 좋아하는 언어로 해보세요.)
 
-1. Implement, as best as you can, the identity function in your favorite language (or the second favorite, if your favorite language happens to be Haskell).
+2. 가장 좋아하는 언어로 합성 함수를 구현해보세요. 두 함수를 인자로 받아서 그들의 합성을 나타내는 함수를 반환하면 됩니다.
 
-2. Implement the composition function in your favorite language. It takes two functions as arguments and returns a function that is their composition.
+3. 여러분의 합성 함수가 항등을 존중하는지 테스트하는 프로그램을 작성해보세요.
 
-3. Write a program that tries to test that your composition function respects identity.
-
+4. 월드 와이드 웹(www)은 카테고리라고 할 수 있을까요? 그렇다면 링크들은 사상(morphism)일까요?
 4. Is the world-wide web a category in any sense? Are links morphisms?
 
-5. Is Facebook a category, with people as objects and friendships as morphisms?
+5. 사용자를 객체라고 하고 친구 관계를 사상(morphism)이라고 한다면 페이스북은 카테고리일까요?
 
-6. When is a directed graph a category?
+6. 방향 그래프가 카테고리가 되는 경우는 언제일까요?
 
-Next: [Types and Functions](https://bartoszmilewski.com/2014/11/24/types-and-functions/)
+다음글: [Types and Functions](https://bartoszmilewski.com/2014/11/24/types-and-functions/)
 
 ---
 
