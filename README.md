@@ -82,7 +82,7 @@
   <p align="center">Beauvais 성당이 무너지는 것을 막아주는 지지대</p>
 </p>
 
-다음글: [Category: The Essence of Composition](/contents/part1/category-the-essence-of-composition.md)
+다음글: [합성(Composition)의 정수, 카테고리](/contents/part1/category-the-essence-of-composition.md)
 
 ---
 
