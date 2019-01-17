@@ -3,83 +3,85 @@
 
 ---
 
-> This is part of the book Category Theory for Programmers. The previous instalment was Category: [The Essence of Composition](https://bartoszmilewski.com/2014/11/04/category-the-essence-of-composition/). See the [Table of Contents](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/).
+> 이 글은 프로그래머를 위한 카테고리 이론이라는 책의 일부입니다. 이전 글은 [합성의 정수, 카테고리](/contents/part1/category-the-essence-of-composition.md)입니다. 목차는 [여기서](/README.md) 확인하실 수 있습니다.
 
-The category of types and functions plays an important role in programming, so let’s talk about what types are and why we need them.
+타입과 함수의 카테고리는 프로그래밍에서 중요한 역할을 합니다. 그럼 타입이 무엇이고 왜 타입을 알아야 하는지 알아보겠습니다.
 
-## Who Needs Types?
+## 타입은 어디에서 쓰이나요?
 
-There seems to be some controversy about the advantages of static vs. dynamic and strong vs. weak typing. Let me illustrate these choices with a thought experiment. Imagine millions of monkeys at computer keyboards happily hitting random keys, producing programs, compiling, and running them.
+static vs dynamic 및 strong vs weak 와 같이 각 타입의 장점에 대해 논란은 들어보셨을 것입니다. 사고 실험을 통해 어떤 의미인지 보여드리겠습니다. 그것은 마치 수백만 마리의 원숭이가 행복하게 컴퓨터 앞에서 아무 키나 누르고 프로그램을 만들고 컴파일하고 실행하는 것과 같습니다.
 
 <p align="center">
 	<img src="/img/img_part1-2_1.jpg" width="258" />
 </p>
 
-With machine language, any combination of bytes produced by monkeys would be accepted and run. But with higher level languages, we do appreciate the fact that a compiler is able to detect lexical and grammatical errors. Lots of monkeys will go without bananas, but the remaining programs will have a better chance of being useful. Type checking provides yet another barrier against nonsensical programs. Moreover, whereas in a dynamically typed language, type mismatches would be discovered at runtime, in strongly typed statically checked languages type mismatches are discovered at compile time, eliminating lots of incorrect programs before they have a chance to run.
+머신 러닝이 있다면 원숭이가 만들어낸 바이트 조합조차도 받아들여지고 실행될 것입니다. 어휘와 문법의 에러를 찾아주는 컴파일러가 있는 고급 언어를 사용하는 우리는 감사해야 합니다. 원숭이들은 바나나 없이 가야겠지만 남겨진 프로그램은 더 유용할 것입니다. 타입 확인은 터무니없는 프로그램들이 생기지 않도록 막아주는 방어막입니다. 동적 타입 언어에선 타입 불일치는 런타임에 발견될 것이고 정적 타입 언어는 타입 불일치를 컴파일 타임에 발견할 것입니다. 옳지않은 프로그램에겐 실행할 기회도 제거해야 합니다.
 
-So the question is, do we want to make monkeys happy, or do we want to produce correct programs?
+그래서 우리가 만들고 싶은 것은 원숭이를 행복하게 만드는 프로그램일까요? 아니면 올바른 프로그램일까요?
 
-The usual goal in the typing monkeys thought experiment is the production of the complete works of Shakespeare. Having a spell checker and a grammar checker in the loop would drastically increase the odds. The analog of a type checker would go even further by making sure that, once Romeo is declared a human being, he doesn’t sprout leaves or trap photons in his powerful gravitational field.
+원숭이들로 하는 사고 실험에선 보통 셰익스피어의 작품과 똑같은 결과를 내는 것이 목표입니다. 맞춤법과 문법 검사기가 있다면 실패할 경우를 엄청나게 줄여줄 것입니다. 로미오가 사람인 것을 타입 검사기에 정의해놓는다면 그에게 나뭇잎이 나거나 중력장 안에서 광자를 뿌리는 등의 행위는 하지 않을 것입니다.
 
-## Types Are About Composability
+## 결합성에 대한 타입들
 
-Category theory is about composing arrows. But not any two arrows can be composed. The target object of one arrow must be the same as the source source object of the next arrow. In programming we pass the results on one function to another. The program will not work if the target function is not able to correctly interpret the data produced by the source function. The two ends must fit for the composition to work. The stronger the type system of the language, the better this match can be described and mechanically verified.
+카테고리 이론은 합성 화살표에 대한 내용입니다. 하지만 아무 화살표 둘이 합성할 순 없습니다. 화살표의 목표 객체는 다음 화살표의 원본 객체여야 합니다. 우리가 프로그래밍에서 한 함수의 결과값을 다른 함수로 보내는 것처럼요. 만약 목표 함수가 원본 함수에서 생성되는 데이터를 완벽하게 이해하지 못한다면 프로그램은 작동하지 않을 것입니다. 함수가 합성하려면 합성하려는 함수들의 끝이 일치해야 합니다. 언어의 타입 시스템이 더 강력할수록 타입 일치가 더 좋아진다는 것은 기계적으로 증명되기도 했으며 설명도 가능합니다.
 
-The only serious argument I hear against strong static type checking is that it might eliminate some programs that are semantically correct. In practice, this happens extremely rarely and, in any case, every language provides some kind of a backdoor to bypass the type system when that’s really necessary. Even Haskell has `unsafeCoerce`. But such devices should be used judiciously. Franz Kafka’s character, Gregor Samsa, breaks the type system when he metamorphoses into a giant bug, and we all know how it ends.
+한 가지 주장은 강력한 정적 타입 확인이 의미적으로 올바른 프로그램을 제거할 수도 있다는 것입니다. 실제로 이런 일이 일어날 확률은 극단적이지만 모든 언어가 이러한 상황을 위해 백도어같은 것을 만들어두는 것은 꼭 필요하다고 생각합니다. 심지어 하스켈에서도 `unsafeCoerce` 가 존재합니다. 그렇지만 그런 기능은 분별력 있게 사용해야 합니다. 그레고르 잠자는 프란츠 카프카 소설의 한 인물인데, 작가가 큰 갑충으로 비유하는 순간 타입 시스템이 파괴되었고 결국에 그는 죽음을 맞이하였습니다.
 
-Another argument I hear a lot is that dealing with types imposes too much burden on the programmer. I could sympathize with this sentiment after having to write a few declarations of iterators in C++ myself, except that there is a technology called type inference that lets the compiler deduce most of the types from the context in which they are used. In C++, you can now declare a variable `auto` and let the compiler figure out its type.
+또 다른 주장은 타입을 다루게 하는 것은 프로그래머에게 너무 많은 짐을 지어준다는 것입니다. 저는 이러한 감정을 몇몇 C++ 이터레이터를 선언할 때 느껴봐서 공감할 수 있습니다. 컴파일러가 타입이 쓰이는 곳을 보고 추론하는 기술인 타입 추론이 있지만 그것은 예외로 치겠습니다. C++에서는 `auto` 변수를 선언하고 컴파일러가 그 변수의 타입을 알아내게 하는 방식도 존재합니다.
 
-In Haskell, except on rare occasions, type annotations are purely optional. Programmers tend to use them anyway, because they can tell a lot about the semantics of code, and they make compilation errors easier to understand. It’s a common practice in Haskell to start a project by designing the types. Later, type annotations drive the implementation and become compiler-enforced comments.
+하스켈에선 몇없는 예외 사항을 제외하고 타입 어노테이션은 순수하게 선택입니다. 코드의 의미를 설명할 수 있으며 컴파일 에러가 이해하기 쉬워진다는 이유로 프로그래머들은 대부분 사용하는 편입니다. 이것은 하스켈에서 타입을 디자인하는 것으로부터 프로젝트를 시작하는 흔한 방식입니다. 나중에는 타입 어노테이션이 구현을 이끌고 컴파일러가 강요하는 내용이 될 것입니다.
 
-Strong static typing is often used as an excuse for not testing the code. You may sometimes hear Haskell programmers saying, “If it compiles, it must be correct.” Of course, there is no guarantee that a type-correct program is correct in the sense of producing the right output. The result of this cavalier attitude is that in several studies Haskell didn’t come as strongly ahead of the pack in code quality as one would expect. It seems that, in the commercial setting, the pressure to fix bugs is applied only up to a certain quality level, which has everything to do with the economics of software development and the tolerance of the end user, and very little to do with the programming language or methodology. A better criterion would be to measure how many projects fall behind schedule or are delivered with drastically reduced functionality.
+강력한 정적 타입을 쓰는 것은 종종 코드를 테스트하지 않는 것에 대한 변명이 되기도 합니다. 하스켈 프로그래머들이 다음과 같은 말을 하는 것을 들어보셨을 수도 있습니다. "컴파일이 된다면 그건 반드시 옳아." 물론 타입이 옳은 프로그램이 옳바른 출력을 한다는 보장은 없습니다. 이러한 무신경한 태도의 결과인지 몇몇 연구에서 하스켈은 생각한 것만큼 앞선 코드 퀄리티를 보여주지 못했습니다. 저는 소프트웨어 개발자를 경제학적으로 보는 시선과 기다려주지 않는 엔드 유저 그리고 언어나 방법론에 긴 시간을 쓸 수 없는 상업적인 환경에서 버그를 고쳐야하는 압력은 코드 품질에 영향을 줘서 어느 정도 한계가 생겼다고 생각합니다. 더 나은 기준은 스케쥴을 넘어서는 프로젝트의 수 또는 기능성을 급격하게 줄여서 배포되는 프로젝트의 수를 측정하면 될 것입니다.
 
-As for the argument that unit testing can replace strong typing, consider the common refactoring practice in strongly typed languages: changing the type of an argument of a particular function. In a strongly typed language, it’s enough to modify the declaration of that function and then fix all the build breaks. In a weakly typed language, the fact that a function now expects different data cannot be propagated to call sites. Unit testing may catch some of the mismatches, but testing is almost always a probabilistic rather than a deterministic process. Testing is a poor substitute for proof.
+유닛 테스트가 강력한 타입 사용을 대체할 수 있다는 주장의 경우엔 강력한 타입 언어에서 사용되는 보통의 리팩토링인 특정 함수의 인자의 타입을 변경하는 경우를 생각해보면 됩니다. 강력한 타입 언어에선 함수의 선언만 수정하고 빌드 오류만 수정하면 됩니다. 약한 타입 언어에선 함수가 이제 다른 타입을 사용한다는 추론을 호출하는 부분에선 알 방법이 없습니다. 유닛 테스트는 몇몇 불일치는 잡아낼 수 있겠지만 테스트는 언제나 결정론적보다는 확률적인 과정이라 증명을 대신 하는 것엔 형편없습니다.
 
-## What Are Types?
+## 타입은 무엇일까요?
 
-The simplest intuition for types is that they are sets of values. The type Bool (remember, concrete types start with a capital letter in Haskell) is a two-element set of `True` and `False`. Type `Char` is a set of all Unicode characters like `'a'` or `'ą'`.
+가장 간단하게 직관적이게 말하자면 타입은 값들의 집합입니다. Bool(하스켈의 구체 타입은 대문자로 시작합니다!)이라는 타입은 `True` 와 `False` 를 원소로 받는 집합입니다. `Char` 타입은 `'a'` 또는 `'ą'` 처럼 모든 유니코드의 집합입니다.
 
-Sets can be finite or infinite. The type of `String`, which is a synonym for a list of `Char`, is an example of an infinite set.
+집합은 유한할수도 무한할수도 있습니다. `Char` 의 배열이라고도 할 수 있는 `String` 타입은 유한 집합의 한 예입니다.
 
-When we declare `x` to be an `Integer`:
+`x` 를 `Integer` 라고 정의해보겠습니다.
 
 ```
 x :: Integer
 ```
 
-we are saying that it’s an element of the set of integers. `Integer` in Haskell is an infinite set, and it can be used to do arbitrary precision arithmetic. There is also a finite-set `Int` that corresponds to machine type, just like the C++ `int`.
+우리는 x를 정수 집합의 원소라고 말할 수 있습니다. 하스켈의 `Integer` 는 유한 집합이고 임의 정밀도 산술(Arbitrary Precision Arithmetic)을 할 수 있습니다. 하스켈엔 또 다른 유한 집합인 `Int` 가 있는데 이는 C++의 `Int` 처럼 기계 타입에 대응합니다.
 
-There are some subtleties that make this identification of types and sets tricky. There are problems with polymorphic functions that involve circular definitions, and with the fact that you can’t have a set of all sets; but as I promised, I won’t be a stickler for math. The great thing is that there is a category of sets, which is called **Set**, and we’ll just work with it. In **Set**, objects are sets and morphisms (arrows) are functions.
+순환 정의를 수반하는 다형성 함수 다형성 함수를 사용할 때 생기는 문제와 모든 집합에 대한 집합을 가질 수 없다는 사실이 타입과 집합을 구별하기 까다롭게 하는 몇 가지 애매한 점입니다. 하지만 저는 수학에 그렇게 까다로운 사람이 아닙니다. 훌륭한 점은 **Set** 이라고 불리는 집합의 카테고리가 있다는 것과 우리는 이것만 사용하면 된다는 것입니다. **Set** 의 객체는 집합이고 사상(morphism, 화살표)은 함수 역할을 합니다.
 
-**Set** is a very special category, because we can actually peek inside its objects and get a lot of intuitions from doing that. For instance, we know that an empty set has no elements. We know that there are special one-element sets. We know that functions map elements of one set to elements of another set. They can map two elements to one, but not one element to two. We know that an identity function maps each element of a set to itself, and so on. The plan is to gradually forget all this information and instead express all those notions in purely categorical terms, that is in terms of objects and arrows.
+**Set** 는 아주 특별한 카테고리인데, 왜냐하면 내부에서 그것의 객체를 선택할 수 있고 그렇게 함으로서 많은 직관을 얻게 되기 때문입니다. 예를 들면 우리는 빈 집합은 원소를 가지고 있지 않다는 사실을 알고있습니다. 우리는 하나의 원소만 가지는 특별한 집합이 있다는 사실을 알고있습니다. 우리는 함수가 한 집합의 원소를 다른 집합의 원소로 매핑(map)해준다는 것을 알고있습니다. 또한 두 원소를 하나의 원소로 매핑하는 일은 가능하지만 하나의 원소를 둘 이상의 원소로 매핑하는 것은 불가능하다는 것도 알고있습니다. 저의 계획은 이러한 정보를 점진적으로 모두 잊게하고 그러한 내용을 순수한 카테고리적인 용어(객체와 화살표)로 표현할 수 있게 바꾸는 것입니다.
 
-In the ideal world we would just say that Haskell types are sets and Haskell functions are mathematical functions between sets. There is just one little problem: A mathematical function does not execute any code — it just knows the answer. A Haskell function has to calculate the answer. It’s not a problem if the answer can be obtained in a finite number of steps — however big that number might be. But there are some calculations that involve recursion, and those might never terminate. We can’t just ban non-terminating functions from Haskell because distinguishing between terminating and non-terminating functions is undecidable — the famous halting problem. That’s why computer scientists came up with a brilliant idea, or a major hack, depending on your point of view, to extend every type by one more special value called the bottom and denoted by `_|_`, or Unicode ⊥. This “value” corresponds to a non-terminating computation. So a function declared as:
+이상적인 세계에선 하스켈의 타입이 집합이고 하스켈의 함수가 집합 사이의 수학적인 함수라고 할 수 있습니다. 하지만 수학적인 함수는 아무 코드도 실행하지 않는다는 작은 문제가 있습니다. 그저 답을 알고 있을 뿐입니다. 하스켈의 함수는 답을 계산하게 되어있습니다. 답이 아무리 크더라도 유한한 숫자 범위 안에 포함된다면 문제가 없습니다. 하지만 재귀를 일으키는 계산이 존재하고 그것들은 절대 끝나지 않습니다. 끝나지 않는 함수를 무조건적으로 하스켈에서 없앨 수는 없습니다. 이는 유명한 정지 문제(Halting Problem)처럼 어떤 것이 끝날 함수고 어떤 것이 끝나지 않을 함수인지 구별할 수가 없기 때문입니다. 여기서 컴퓨터 과학자들은 아주 영리하게 바텀 타입(bottom type)을 생각해냈고 기호로 쓰면 `_|_` (유니코드론 ⊥)입니다. 이 "값"은 끝나지 않을 계산을 의미합니다. 아래와 같은 함수가 있다고 해보겠습니다.
 
 ```
 f :: Bool -> Bool
 ```
 
-may return `True`, `False`, or `_|_`; the latter meaning that it would never terminate.
+위 함수는 `True`, `False` 또는 절대 끝나지 않는다는 의미의 `_|_` 를 반환할 것입니다.
 
-Interestingly, once you accept the bottom as part of the type system, it is convenient to treat every runtime error as a bottom, and even allow functions to return the bottom explicitly. The latter is usually done using the expression `undefined`, as in:
+흥미롭게도 여러분이 이 바텀 타입을 타입 시스템의 일부로 받아들이는 순간, 모든 런타임 에러를 간편하게 바텀 타입으로 취급하게 되고 심지어 함수가 명시적으로 이 기호를 반환하도록 하기도 합니다. 후자의 경우엔 보통 `undefined` 라는 표현으로 사용됩니다.
 
 ```
 f :: Bool -> Bool
 f x = undefined
 ```
 
-This definition type checks because `undefined` evaluates to bottom, which is a member of any type, including `Bool`. You can even write:
+`undefined` 는 `Bool` 을 포함하여 어떤 타입도 될 수 있기 때문에 위 정의는 아래와 같이 쓸 수도 있습니다.
 
 ```
 f :: Bool -> Bool
 f = undefined
 ```
 
-(without the `x`) because the bottom is also a member of the type `Bool->Bool`.
+(`x`가 없어졌습니다)
 
-Functions that may return bottom are called partial, as opposed to total functions, which return valid results for every possible argument.
+왜냐하면 바텀 타입은 `Bool->Bool` 의 일부이기도 하기 때문입니다.
 
-Because of the bottom, you’ll see the category of Haskell types and functions referred to as **Hask** rather than **Set**. From the theoretical point of view, this is the source of never-ending complications, so at this point I will use my butcher’s knife and terminate this line of reasoning. From the pragmatic point of view, it’s okay to ignore non-terminating functions and bottoms, and treat **Hask** as bona fide **Set** (see Bibliography at the end).
+바텀 타입을 반환하는 함수는 부분(partial) 정의 함수이라고 불리는데, 이는 모든 가능한 경우에 대해 유효한 결과만 반환하는 종합(total) 함수와 반대되는 내용입니다.
+
+바텀덕분에 우리는 **Set** 대신에 하스켈의 타입과 함수들의 카테고리인 **Hask** 를 사용할 수 있을 것입니다. 이론적인 측면에서 이는 끝나지 않는 복잡함의 시작이겠지만 이 시점에 저는 만능칼을 꺼내서 이를 증명하는 부분을 잘라내려고 합니다. 프로그래밍적인 측면에서 끝나지 않는 함수와 바텀 타입은 무시해도 괜찮은 부분이고 **Hask** 를 진짜 **Set** 이라고 취급해도 괜찮습니다(글의 끝에 있는 참고문헌 부분을 확인해주세요).
 
 ## Why Do We Need a Mathematical Model?
 
