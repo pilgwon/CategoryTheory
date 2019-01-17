@@ -1,4 +1,4 @@
-# 함수와 타입
+# 타입과 함수
 원본 사이트: [Types and Functions](https://bartoszmilewski.com/2014/11/24/types-and-functions/)
 
 ---

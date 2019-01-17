@@ -175,7 +175,7 @@ id . f == f
 
 6. 방향 그래프가 카테고리가 되는 경우는 언제일까요?
 
-다음글: [함수와 타입](/contents/part1/types-and-functions.md)
+다음글: [타입과 함수](/contents/part1/types-and-functions.md)
 
 ---
 
