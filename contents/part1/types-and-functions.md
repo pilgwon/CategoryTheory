@@ -118,8 +118,7 @@ int fact(int n) {
 
 좋습니다. 솔직히 너무 쉬운 예제였다는 것을 인정하겠습니다! 팩토리얼 함수는 명백하게 수학적인 의미를 가집니다. 어떤 분들은 키보드에서 텍스트 읽어오기나 네트워크에 패킷을 보내는 것에 어떤 수학적 모델이 있는지 질문하실 수도 있습니다. 그것은 오랫동안 복잡한 설명을 해주는 것 대신에 어색하게 만드는 질문이었을 것입니다. 제가 보기에 표시적 의미론은 유용한 프로그램을 작성하는데에 필수가 되는 중요한 업무는 아닌 것 같습니다. Eugenio Moggi는 컴퓨터의 효과는 모나드(Monad)로 매핑될 수 있다는 것을 발견했습니다. 이는 표시적 의미론에게 새로운 인생이 시작되게하고 순수 함수형 프로그래밍을 더 유용하게 만들었을 뿐만 아니라 전통적 프로그래밍에 새로운 빛을 제공했습니다. 모나드(Monad)에 대해선 나중에 우리가 카테고리에 대해 더 많이 알게된 이후에 얘기하도록 하겠습니다.
 
-
-One of the important advantages of having a mathematical model for programming is that it’s possible to perform formal proofs of correctness of software. This might not seem so important when you’re writing consumer software, but there are areas of programming where the price of failure may be exorbitant, or where human life is at stake. But even when writing web applications for the health system, you may appreciate the thought that functions and algorithms from the Haskell standard library come with proofs of correctness.
+프로그래밍에 수학적 모델을 적용하는 것의 큰 이점 중 하나는 소프트웨어의 옳음에 대해 공식적으로 증명할 수 있게 되었다는 것입니다. 이는 컴퓨터 소프트웨어를 작성할 때는 그렇게 도움되는 내용은 아니지만 프로그래밍의 가격과 실패가 엄청난 타격을 주거나 사람의 생명이 위태로울 경우가 있습니다. 그리고 건강 시스템을 위한 웹 어플리케이션을 작성할 때도 하스켈 표준 라이브러리에서 옳음에 대해 증명된 함수와 알고리즘을 사용하면 됩니다.
 
 ## Pure and Dirty Functions
 
