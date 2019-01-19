@@ -83,25 +83,26 @@ f = undefined
 
 바텀덕분에 우리는 **Set** 대신에 하스켈의 타입과 함수들의 카테고리인 **Hask** 를 사용할 수 있을 것입니다. 이론적인 측면에서 이는 끝나지 않는 복잡함의 시작이겠지만 이 시점에 저는 만능칼을 꺼내서 이를 증명하는 부분을 잘라내려고 합니다. 프로그래밍적인 측면에서 끝나지 않는 함수와 바텀 타입은 무시해도 괜찮은 부분이고 **Hask** 를 진짜 **Set** 이라고 취급해도 괜찮습니다(글의 끝에 있는 참고문헌 부분을 확인해주세요).
 
-## Why Do We Need a Mathematical Model?
+## 왜 수학적 모델이 필요할까요?
 
-As a programmer you are intimately familiar with the syntax and grammar of your programming language. These aspects of the language are usually described using formal notation at the very beginning of the language spec. But the meaning, or semantics, of the language is much harder to describe; it takes many more pages, is rarely formal enough, and almost never complete. Hence the never ending discussions among language lawyers, and a whole cottage industry of books dedicated to the exegesis of the finer points of language standards.
+프로그래머들은 각자의 프로그래밍 언어의 문법에 매우 친밀할 것입니다. 언어의 이러한 측면은 보통 언어 스펙의 앞쪽에 있는 공식적인 표기법으로 설명됩니다. 하지만 언어의 의미를 설명하는 것은 비공식적인 문서도 더 많이 필요하고 거의 절대로 완성되지 않는 어려운 일입니다. 언어 변호사들의 끝나지 않는 토론의 이유로 모든 책 가내 수공업들은 언어 표준의 더 나은 지점의 주해를 위해 공헌됩니다.
 
-There are formal tools for describing the semantics of a language but, because of their complexity, they are mostly used with simplified academic languages, not real-life programming behemoths. One such tool called operational semantics describes the mechanics of program execution. It defines a formalized idealized interpreter. The semantics of industrial languages, such as C++, is usually described using informal operational reasoning, often in terms of an “abstract machine.”
+언어의 의미를 설명하는 공식적인 도구가 존재하지만 그들의 복잡도때문에 간단한 학문적 언어들에만 쓰이고 실생활의 프로그래밍 언어에서는 쓰이지 않습니다. 거기선 표준화되고 최적화된 인터프리터를 정의합니다. C++과 같은 산업적 언어의 의미는 비공식적인 연산 추론을 통해 설명되고 이는 보통 "추상 기계(abstract machine)"라고 불립니다.
 
-The problem is that it’s very hard to prove things about programs using operational semantics. To show a property of a program you essentially have to “run it” through the idealized interpreter.
+문제는 운용 의미론(operational semantic)을 사용하는 프로그램의 증명이 매우 어렵다는 것입니다. 프로그램의 속성을 보려면 반드시 최적화된 인터프리터에서 "실행"해야 하기 때문입니다.
 
-It doesn’t matter that programmers never perform formal proofs of correctness. We always “think” that we write correct programs. Nobody sits at the keyboard saying, “Oh, I’ll just throw a few lines of code and see what happens.” We think that the code we write will perform certain actions that will produce desired results. We are usually quite surprised when it doesn’t. That means we do reason about programs we write, and we usually do it by running an interpreter in our heads. It’s just really hard to keep track of all the variables. Computers are good at running programs — humans are not! If we were, we wouldn’t need computers.
+프로그래머는 옳음에 대해 공식적인 증명을 하지 않아도 괜찮습니다. 우리는 항상 우리가 옳은 프로그램을 작성한다고 "생각"합니다. 키보드에 앉아서 "오 내가 코드 몇 줄 작성했으니 무슨 일이 일어나는지 봐"라고 하는 사람은 아무도 없습니다. 보통은 작성하는 코드가 내가 원하는 특정한 액션을 할거라 생각합니다. 그렇게 되지 않았을 경우 놀라죠. 이는 우리가 우리가 작성하는 프로그램에 대해 머릿속에 있는 인터프리터를 사용해 실행해본다는 것을 의미합니다. 그렇지만 모든 변수를 기억하고 있는 것은 정말 어려운 일입니다. 컴퓨터는 프로그램을 실행하는 데에 특화돼있지만 인간은 그렇지 않습니다! 그랬다면 우린 컴퓨터가 필요없었겠죠.
 
-But there is an alternative. It’s called denotational semantics and it’s based on math. In denotational semantics every programing construct is given its mathematical interpretation. With that, if you want to prove a property of a program, you just prove a mathematical theorem. You might think that theorem proving is hard, but the fact is that we humans have been building up mathematical methods for thousands of years, so there is a wealth of accumulated knowledge to tap into. Also, as compared to the kind of theorems that professional mathematicians prove, the problems that we encounter in programming are usually quite simple, if not trivial.
+하지만 대체재는 존재합니다. 이는 표시적 의미론(denotational semantic)이라고 하는데 수학에 기반하고 있습니다. 표시적 의미론에선 모든 프로그래밍 구성품들이 수학적인 인터프리터를 가집니다. 그렇게 되면 프로그램의 특정 속성을 증명하고 싶을 때 수학적 정리만 증명하면 됩니다. 정리를 증명하는 것이 어려울 수 있지만 우리 인간들은 몇천년동안 수학적 메소드를 쌓아왔기 때문에 축적된 지식들이 많습니다. 또한 전문적인 수학가가 증명하는 정리에 비교해서 프로그래밍에서 마주치는 문제들은 보통 상대적으로 간단합니다.
 
-Consider the definition of a factorial function in Haskell, which is a language quite amenable to denotational semantics:
+하스켈에서 표시적 의미론을 받아들일 수 있는 팩토리얼 함수의 정의를 예로 들어보겠습니다.
 
 ```
 fact n = product [1..n]
 ```
 
-The expression `[1..n]` is a list of integers from 1 to n. The function `product` multiplies all elements of a list. That’s just like a definition of factorial taken from a math text. Compare this with C:
+`[1..n]` 라는 표현은 1부터 n까지의 정수의 목록을 나타내는 표현입니다. `product` 라는 함수는 목록에 있는 모든 요소를 곱한다는 의미입니다. 이는 수학 문서에서 가져온 팩토리얼 정의와 비슷하게 생겼습니다.
+이제 C로 만든 예제롤 보겠습니다.
 
 ```
 int fact(int n) {
@@ -113,9 +114,10 @@ int fact(int n) {
 }
 ```
 
-Need I say more?
+더 얘기해볼까요?
 
-Okay, I’ll be the first to admit that this was a cheap shot! A factorial function has an obvious mathematical denotation. An astute reader might ask: What’s the mathematical model for reading a character from the keyboard or sending a packet across the network? For the longest time that would have been an awkward question leading to a rather convoluted explanation. It seemed like denotational semantics wasn’t the best fit for a considerable number of important tasks that were essential for writing useful programs, and which could be easily tackled by operational semantics. The breakthrough came from category theory. Eugenio Moggi discovered that computational effect can be mapped to monads. This turned out to be an important observation that not only gave denotational semantics a new lease on life and made pure functional programs more usable, but also shed new light on traditional programming. I’ll talk about monads later, when we develop more categorical tools.
+좋습니다. 솔직히 너무 쉬운 예제였다는 것을 인정하겠습니다! 팩토리얼 함수는 명백하게 수학적인 의미를 가집니다. 어떤 분들은 키보드에서 텍스트 읽어오기나 네트워크에 패킷을 보내는 것에 어떤 수학적 모델이 있는지 질문하실 수도 있습니다. 그것은 오랫동안 복잡한 설명을 해주는 것 대신에 어색하게 만드는 질문이었을 것입니다. 제가 보기에 표시적 의미론은 유용한 프로그램을 작성하는데에 필수가 되는 중요한 업무는 아닌 것 같습니다. Eugenio Moggi는 컴퓨터의 효과는 모나드(Monad)로 매핑될 수 있다는 것을 발견했습니다. 이는 표시적 의미론에게 새로운 인생이 시작되게하고 순수 함수형 프로그래밍을 더 유용하게 만들었을 뿐만 아니라 전통적 프로그래밍에 새로운 빛을 제공했습니다. 모나드(Monad)에 대해선 나중에 우리가 카테고리에 대해 더 많이 알게된 이후에 얘기하도록 하겠습니다.
+
 
 One of the important advantages of having a mathematical model for programming is that it’s possible to perform formal proofs of correctness of software. This might not seem so important when you’re writing consumer software, but there are areas of programming where the price of failure may be exorbitant, or where human life is at stake. But even when writing web applications for the health system, you may appreciate the thought that functions and algorithms from the Haskell standard library come with proofs of correctness.
 
