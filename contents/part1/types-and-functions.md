@@ -225,26 +225,29 @@ enum bool {
 
 4. 다음 중 어떤 C++ 함수가 순수할까요? 이들을 memoize로 만들어보고 여러번 호출했을 때 원래 함수와 새로운 함수에 어떤 일이 일어나는지 확인해보세요.
 
-4-1. 글에 예제로 나온 팩토리얼 함수
+  4-1. 글에 예제로 나온 팩토리얼 함수
 
-4-2. ```
-  std::getchar()
+  4-2.
+```
+std::getchar()
 ```
 
-4-3. ```
-	bool f() {
-  	std::cout << "Hello!" << std::endl;
-    return true;
-	}
+  4-3.
+```
+bool f() {
+  std::cout << "Hello!" << std::endl;
+  return true;
+}
 ```
 
-4-4. ```
-  int f(int x)
-	{
-		static int y = 0;
-		y += x;
-		return y;
-	}
+  4-4.
+```
+int f(int x)
+{
+	static int y = 0;
+	y += x;
+	return y;
+}
 ```
 
 5. `Bool`에서 `Bool`로 가는 서로 다른 함수는 몇 개가 있을까요? 모두를 구현할 수 있으신가요?
