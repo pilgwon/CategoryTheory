@@ -258,7 +258,7 @@ int f(int x)
 
 1. Nils Anders Danielsson, John Hughes, Patrik Jansson, Jeremy Gibbons, [Fast and Loose Reasoning is Morally Correct](http://www.cs.ox.ac.uk/jeremy.gibbons/publications/fast+loose.pdf).
 
-Next: [다양한 종류의 카테고리들](https://bartoszmilewski.com/2014/12/05/categories-great-and-small/)
+Next: [다양한 종류의 카테고리](/contents/part1/categories-great-and-small.md)
 
 ---
 
