@@ -1,5 +1,5 @@
-# Kleisli 카테고리
-원본 사이트: [Kleisli Categories](https://bartoszmilewski.com/2014/12/23/kleisli-categories/)
+# Product와 Coproduct
+원본 사이트: [Products and Coproducts](https://bartoszmilewski.com/2015/01/07/products-and-coproducts/)
 
 ---
 
@@ -301,9 +301,3 @@ The particular monad that I used as the basis of the category in this post is ca
 ## Acknowledgments
 
 I’m grateful to Eric Niebler for reading the draft and providing the clever implementation of `compose` that uses advanced features of C++14 to drive type inference. I was able to cut the whole section of old fashioned template magic that did the same thing using type traits. Good riddance! I’m also grateful to Gershom Bazerman for useful comments that helped me clarify some important points.
-
-다음: [Product와 Coproduct](/contents/part1/product-and-coproduct.md)
-
----
-
-공부 목적으로 번역을 하고 있습니다! 잘못된 점에 대한 이슈나 PR은 언제든지 환영합니다 :)
