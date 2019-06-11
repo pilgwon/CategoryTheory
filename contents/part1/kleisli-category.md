@@ -174,7 +174,7 @@ function<Writer<C>(A)> compose(function<Writer<B>(A)> m1,
 }
 ```
 
-Now we can go back to our earlier example and implement the composition of `toUpper` and `toWords` using this new template:
+그러면 그 템플릿 방식으로 앞에서 다뤘던 `toUpper`와 `toWords`의 합성을 구현해보겠습니다.
 
 ```
 Writer<vector<string>> process(string s) {
@@ -182,7 +182,7 @@ Writer<vector<string>> process(string s) {
 }
 ```
 
-There is still a lot of noise with the passing of types to the `compose` template. This can be avoided as long as you have a C++14-compliant compiler that supports generalized lambda functions with return type deduction (credit for this code goes to Eric Niebler):
+위 방식은 `compose` 템플릿의 타입에 넘기기엔 여전히 좋지 않습니다. 반환 값을 추론할 수 있는 일반화된 람다 함수를 가진 C++ 14이상의 컴파일러가 있다면 이런 상황을 피할 수 있습니다. (이 부분도 저번 글에 이어 Eric Niebler의 작품입니다)
 
 ```
 auto const compose = [](auto m1, auto m2) {
@@ -194,7 +194,7 @@ auto const compose = [](auto m1, auto m2) {
 };
 ```
 
-In this new definition, the implementation of `process` simplifies to:
+새롭게 정의한 부분에서 `process`의 구현체를 간단하게 설명하면 다음과 같습니다.
 
 ```
 Writer<vector<string>> process(string s){
