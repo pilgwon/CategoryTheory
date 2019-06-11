@@ -5,9 +5,9 @@
 
 > 이 글은 프로그래머를 위한 카테고리 이론이라는 책의 일부입니다. 이전 글은 [다양한 종류의 카테고리](/contents/part1/categories-great-and-small.md) 입니다. 목차는 [여기서](/README.md) 확인하실 수 있습니다.
 
-## Composition of Logs
+## 로그의 합성
 
-You’ve seen how to model types and pure functions as a category. I also mentioned that there is a way to model side effects, or non-pure functions, in category theory. Let’s have a look at one such example: functions that log or trace their execution. Something that, in an imperative language, would likely be implemented by mutating some global state, as in:
+타입과 순수 함수를 카테고리로 모델링하는 것은 앞에서 보셨을 것입니다. 또한 사이드 이펙트나 순수하지 않은 함수를 모델링하는 방법에 대해서도 언급했었습니다. 실행(execution) 로그를 추적하는 함수를 예로 들어보겠습니다. 명령형 언어에선 다음과 같이 어떤 전역 변수를 변경하는 방식으로 구현할 것입니다.
 
 ```
 string logger;
@@ -18,11 +18,11 @@ bool negate(bool b) {
 }
 ```
 
-You know that this is not a pure function, because its memoized version would fail to produce a log. This function has *side effects*.
+이 함수는 *사이드 이펙트* 를 가지고 있기 때문에 순수한 함수가 아님을 아실 것입니다.
 
-In modern programming, we try to stay away from global mutable state as much as possible — if only because of the complications of concurrency. And you would never put code like this in a library.
+전역 변수를 사용하는 일은 복잡한 동시성(concurrency)이 특징인 모던 프로그래밍에선 피해야 할 사항입니다. 그러니 저런 코드를 라이브러리에 추가하는 것은 절대 하면 안될 일입니다.
 
-Fortunately for us, it’s possible to make this function pure. You just have to pass the log explicitly, in and out. Let’s do that by adding a string argument, and pairing regular output with a string that contains the updated log:
+이 함수를 순수하게 만들 수 있는 저희는 행운아입니다. 저흰 그저 로그만 넘기면 됩니다. 그러면 문자열을 인자로 받고 업데이트된 로그를 포함하는 문자열을 출력하는 함수를 만들어보겠습니다.
 
 ```
 pair<bool, string> negate(bool b, string logger) {
@@ -30,23 +30,16 @@ pair<bool, string> negate(bool b, string logger) {
 }
 ```
 
-This function is pure, it has no side effects, it returns the same pair every time it’s called with the same arguments, and it can be memoized if necessary. However, considering the cumulative nature of the log, you’d have to memoize all possible histories that can lead to a given call. There would be a separate memo entry for:
+이 함수는 순수하고 사이드 이펙트도 존재하지 않습니다. 이 함수는 같은 인자를 입력하면 항상 같은 결과를 출력합니다. 필요하다면 memoize할 수도 있습니다. 하지만 누적되는 것이 운명인 로그를 memoize한다면 아마 모든 경우의 수에 대해 다 memoize해야 할 것입니다.
 
 ```
 negate(true, "It was the best of times. ");
 ```
+가 반복되는 경우까지도요.
 
-and
+그것은 또한 라이브러리 함수에게 어울리는 인터페이스는 아닙니다. 사용자는 호출한 결과를 무시할 수 있으니 로그를 매번 계산하는 것은 큰 부담이 아닙니다. 오히려 불편할 수 있는 부분은 항상 문자열을 입력해야한다는 것입니다.
 
-```
-negate(true, "It was the worst of times. ");
-```
-
-and so on.
-
-It’s also not a very good interface for a library function. The callers are free to ignore the string in the return type, so that’s not a huge burden; but they are forced to pass a string as input, which might be inconvenient.
-
-Is there a way to do the same thing less intrusively? Is there a way to separate concerns? In this simple example, the main purpose of the function negate is to turn one Boolean into another. The logging is secondary. Granted, the message that is logged is specific to the function, but the task of aggregating the messages into one continuous log is a separate concern. We still want the function to produce a string, but we’d like to unburden it from producing a log. So here’s the compromise solution:
+사용자를 덜 방해할 방법은 없을까요? 관심사를 분리할 수 있는 방법은 없을까요? 위의 간단한 예제에선 negate 함수의 가장 주된 목적은 하나의 불리언 값을 뒤집는 것입니다. 로깅은 그 다음 일입니다. 그러니 로깅되는 메세지는 함수에 의존성을 가질지라도, 하나의 로그에 메세지를 쌓는 일은 분리되어야 할 고민이라는 것입니다. 정리하자면 우리에게 필요한 것은 입력할 부담은 없지만 입력된 값에 맞는 로그를 생성하는 함수입니다. 다음과 같이 작성하면 되겠네요.
 
 ```
 pair<bool, string> negate(bool b) {
@@ -54,9 +47,9 @@ pair<bool, string> negate(bool b) {
 }
 ```
 
-The idea is that the log will be aggregated between function calls.
+이는 함수의 호출과 다음 호출 사이에 로그가 쌓일거라는 아이디어에서 나왔습니다.
 
-To see how this can be done, let’s switch to a slightly more realistic example. We have one function from string to string that turns lower case characters to upper case:
+조금 더 현실적인 예시를 들어볼까요? 소문자로 이루어진 문자열을 대문자로 이루어진 문자열로 바꿔주는 함수가 있다고 해봅시다.
 
 ```
 string toUpper(string s) {
@@ -67,7 +60,7 @@ string toUpper(string s) {
 }
 ```
 
-and another that splits a string into a vector of strings, breaking it on whitespace boundaries:
+그리고 다른 하나는 문자열의 공백을 없애서 단어로 분리하는 함수가 있습니다.
 
 ```
 vector<string> toWords(string s) {
@@ -75,7 +68,7 @@ vector<string> toWords(string s) {
 }
 ```
 
-The actual work is done in the auxiliary function words:
+실제 작업은 보조 함수인 words가 해줍니다.
 
 ```
 vector<string> words(string s) {
@@ -91,16 +84,16 @@ vector<string> words(string s) {
 }
 ```
 
-We want to modify the functions `toUpper` and `toWords` so that they piggyback a message string on top of their regular return values.
+이제 `toUpper`와 `toWords`를 수정해서 결과값과 메세지 문자열을 동시에 가지도록 해보겠습니다.
 
-We will “embellish” the return values of these functions. Let’s do it in a generic way by defining a template `Writer` that encapsulates a pair whose first component is a value of arbitrary type A and the second component is a string:
+저희는 이 함수의 결과값을 "embellished"할 것입니다. `Writer` 템플릿을 정의해서 제네릭한 방식으로 쌍으로 압축하겠습니다. 쌍은 먼저 임의의 타입인 A와 문자열로 이루어져 있습니다.
 
 ```
 template<class A>
 using Writer = pair<A, string>;
 ```
 
-Here are the embellished functions:
+다음은 embellished 함수입니다.
 
 ```
 Writer<string> toUpper(string s) {
@@ -115,7 +108,7 @@ Writer<vector<string>> toWords(string s) {
 }
 ```
 
-We want to compose these two functions into another embellished function that uppercases a string and splits it into words, all the while producing a log of those actions. Here’s how we may do it:
+이제 이 두 함수를 합성해서 문자열을 대문자로 만들고 단어로 나누는 embellished 함수로 만들어봅시다. 그리고 모든 행동은 로그를 남겨야겠죠? 다음과 같이 만들면 되겠네요.
 
 ```
 Writer<vector<string>> process(string s) {
@@ -125,15 +118,15 @@ Writer<vector<string>> process(string s) {
 }
 ```
 
-We have accomplished our goal: The aggregation of the log is no longer the concern of the individual functions. They produce their own messages, which are then, externally, concatenated into a larger log.
+목표를 달성했습니다. 로그가 쌓이는 것은 더 이상 개별 함수의 관심사가 아닙니다. 그들은 외부에서 자신만의 메세지를 생성하고 더 큰 로그에 합칩니다.
 
-Now imagine a whole program written in this style. It’s a nightmare of repetitive, error-prone code. But we are programmers. We know how to deal with repetitive code: we abstract it! This is, however, not your run of the mill abstraction — we have to abstract function composition itself. But composition is the essence of category theory, so before we write more code, let’s analyze the problem from the categorical point of view.
+그럼 이제 모든 함수가 이러한 방식으로 구현된 프로그램을 상상해볼까요? 그건 아마 지루하고 반복적이며 오류 발생이 쉬운 악몽이 될 것입니다. 우리 프로그래머들은 이런 문제를 어떻게 파훼해야 할 지 알고있죠? 바로 추상화입니다! 하지만 함수를 쪼개서 추상화하는 방법말고 함수 합성 자체를 추상화해야 합니다. 하지만 합성은 카테고리 이론의 정수이기 때문에 코드를 작성하기 전에 카테고리적인 시각으로 문제를 분석해보겠습니다.
 
-## The Writer Category
+## Writer 카테고리
 
-The idea of embellishing the return types of a bunch of functions in order to piggyback some additional functionality turns out to be very fruitful. We’ll see many more examples of it. The starting point is our regular category of types and functions. We’ll leave the types as objects, but redefine our morphisms to be the embellished functions.
+추가적인 기능을 묶어두기 위해 함수들의 반환 타입을 embellish하는 아이디어는 굉장히 유익합니다. 예시를 보겠습니다. 기본적인 타입과 함수의 카테고리에서 시작해볼까요? 타입을 객체로 두되, 사상을 embellish된 함수라고 재정의합니다.
 
-For instance, suppose that we want to embellish the function `isEven` that goes from `int` to `bool`. We turn it into a morphism that is represented by an embellished function. The important point is that this morphism is still considered an arrow between the objects `int` and `bool`, even though the embellished function returns a pair:
+`int`를 받아서 `bool`을 반환하는 함수인 `isEven`을 embellish하는 것을 생각해보겠습니다. 우리는 이를 사상으로 바꿔서 embellish된 함수로 표현해보겠습니다. 중요한 점은 이 사상은 embellish된 함수가 쌍을 반환하더라도 여전히 `int`와 `bool`객체 사이를 이어주고 있다는 점입니다.
 
 ```
 pair<bool, string> isEven(int n) {
@@ -141,7 +134,7 @@ pair<bool, string> isEven(int n) {
 }
 ```
 
-By the laws of a category, we should be able to compose this morphism with another morphism that goes from the object `bool` to whatever. In particular, we should be able to compose it with our earlier `negate`:
+카테고리의 법칙에 의하면 우리는 이 사상을 `bool`에서 시작하는 다른 어떤 사상과 합성할 수 있어야 합니다. 앞에서 다뤘던 `negate`도 대상이 될 수 있겠네요.
 
 ```
 pair<bool, string> negate(bool b) {
@@ -149,7 +142,7 @@ pair<bool, string> negate(bool b) {
 }
 ```
 
-Obviously, we cannot compose these two morphisms the same way we compose regular functions, because of the input/output mismatch. Their composition should look more like this:
+한 가지 명확한 것은 입력과 출력의 모양이 다르기 때문에 지금까지 해왔던 보통의 함수 합성 방식으로는 두 사상을 합성할 수 없다는 것입니다. 둘을 합성하는 함수를 만들면 다음과 같을 것입니다.
 
 ```
 pair<bool, string> isOdd(int n) {
@@ -159,14 +152,14 @@ pair<bool, string> isOdd(int n) {
 }
 ```
 
-So here’s the recipe for the composition of two morphisms in this new category we are constructing:
+여기 두 사상을 합칠 때 새로운 카테고리를 만들어서 합성하는 레시피를 공개합니다.
 
-1. Execute the embellished function corresponding to the first morphism
-1. Extract the first component of the result pair and pass it to the embellished function corresponding to the second morphism
-1. Concatenate the second component (the string) of of the first result and the second component (the string) of the second result
-1. Return a new pair combining the first component of the final result with the concatenated string.
+1. 첫 번째 사상에 대응하는 embellish된 함수를 작성합니다.
+1. 결과로 반환된 쌍의 첫 번째 값을 추출해서 두 번째 사상에 대응하는 embellish된 함수에 넣어줍니다.
+1. 첫번째 결과의 두 번째 값과 두 번째 결과의 두 번째 값을 합칩니다.
+1. 합친 문자열과 최종 결과의 첫 번째 값을 쌍으로 만들어서 반환합니다.
 
-If we want to abstract this composition as a higher order function in C++, we have to use a template parameterized by three types corresponding to three objects in our category. It should take two embellished functions that are composable according to our rules, and return a third embellished function:
+이 합성을 C++에서 고계함수로 추상화하고 싶다면 카테고리의 세 개의 값에 대응하는 세 개의 타입을 인자로 받는 템플릿을 사용해야 합니다. 이 템플릿은 규칙에 맞고 세 번째 embellish된 함수를 만들 수 있는 두 개의 embellish된 함수를 받습니다.
 
 ```
 template<class A, class B, class C>
