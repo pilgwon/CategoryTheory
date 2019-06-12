@@ -8,7 +8,7 @@
 1. [합성(Composition)의 정수, 카테고리](/contents/part1/category-the-essence-of-composition.md)
 2. [타입과 함수](/contents/part1/types-and-functions.md)
 3. [다양한 종류의 카테고리](/contents/part1/categories-great-and-small.md)
-4. \[미번역\] [Kleisli 카테고리](https://bartoszmilewski.com/2014/12/23/kleisli-categories/)
+4. [Kleisli 카테고리](/contents/part1/kleisli-category.md)
 5. \[미번역\] [Product와 Coproduct](https://bartoszmilewski.com/2015/01/07/products-and-coproducts/)
 6. \[미번역\] [간단한 대수적 데이터 타입들](https://bartoszmilewski.com/2015/01/13/simple-algebraic-data-types/)
 7. \[미번역\] [함자(Functors)](https://bartoszmilewski.com/2015/01/20/functors/)
