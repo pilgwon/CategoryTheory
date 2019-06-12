@@ -202,13 +202,13 @@ Writer<vector<string>> process(string s){
 }
 ```
 
-But we are not finished yet. We have defined composition in our new category, but what are the identity morphisms? These are not our regular identity functions! They have to be morphisms from type A back to type A, which means they are embellished functions of the form:
+아직 끝이 아닙니다. 새로운 카테고리의 합성을 정의했는데 단위 사상은 무엇일까요? 보통의 단위 함수는 아닐 것입니다. 단위 사상에는 다음과 같이 표현되는 타입 A에서 타입 A로 돌아오는 사상이 필요하기 때문입니다.
 
 ```
 Writer<A> identity(A);
 ```
 
-They have to behave like units with respect to composition. If you look at our definition of composition, you’ll see that an identity morphism should pass its argument without change, and only contribute an empty string to the log:
+단위 사상은 합성에서 항등원과 같이 작동해야 합니다. 합성의 정의를 보셨다면 단위 사상은 그들의 인자를 아무런 변화없이 넘겨야 하고 로그에는 빈 스트링을 남겨야한다는 것을 아셨을 것입니다.
 
 ```
 template<class A>
@@ -217,32 +217,35 @@ Writer<A> identity(A x) {
 }
 ```
 
-You can easily convince yourself that the category we have just defined is indeed a legitimate category. In particular, our composition is trivially associative. If you follow what’s happening with the first component of each pair, it’s just a regular function composition, which is associative. The second components are being concatenated, and concatenation is also associative.
+저희가 정의한 카테고리가 타당하다는 것을 이해하기는 어렵지 않을 것입니다. 특히 우리의 합성은 결합법칙을 가지죠. 각 쌍의 첫 번째 컴포넌트에 어떤 일이 생기는지 따라가보면 아시겠지만 결합법칙이 성립하는 평범한 함수 합성입니다.
 
-An astute reader may notice that it would be easy to generalize this construction to any monoid, not just the string monoid. We would use `mappend` inside `compose` and `mempty` inside `identity` (in place of `+` and `""`). There really is no reason to limit ourselves to logging just strings. A good library writer should be able to identify the bare minimum of constraints that make the library work — here the logging library’s only requirement is that the log have monoidal properties.
+영리하신 분이라면 이러한 구조를 문자열 모노이드가 아닌 다른 어떤 모노이드로도 일반화할 수 있다는 사실을 깨달으셨을 것입니다. `+`와 `""`대신에 `compose`안의 `mappend`와 `identity`안의 `mempty`를 사용할 것입니다. 그렇게 되면 우리의 로깅이 단순한 문자열만으로 제한될 이유가 사라집니다. 좋은 라이브러리 제작자라면 라이브러리가 작동하는데에 방해되는 요소는 최대한 없애야합니다. 이제 우리의 로깅 라이브러리가 요구하는 조건은 그저 모노이드스러운 속성뿐입니다.
 
-## Writer in Haskell
+## Haskell의 Writer
 
-The same thing in Haskell is a little more terse, and we also get a lot more help from the compiler. Let’s start by defining the `Writer` type:
+Haskell에서도 비슷한 것이 있는데 앞에서 알아본 것보다 더 간결한 편이고 컴파일러가 주는 도움이 더 많아집니다. `Writer` 타입을 정의하는 것부터 시작해보겠습니다.
 
+```
 type Writer a = (a, String)
-Here I’m just defining a type alias, an equivalent of a `typedef` (or `using`) in C++. The type `Writer` is parameterized by a type variable `a` and is equivalent to a pair of `a` and `String`. The syntax for pairs is minimal: just two items in parentheses, separated by a comma.
+```
 
-Our morphisms are functions from an arbitrary type to some `Writer` type:
+위와 같이 C++의 `typedef`(혹은 `using`)과 동일한 타입 얼라이어스를 정의했습니다. `Writer` 타입은 타입 변수 `a`로 파라미터화되었고 `a`와 `String`의 쌍과 동일합니다. 쌍을 위한 문법도 간편합니다. 그저 두 아이템을 괄호안에 넣고 쉼표로 구분해주면 됩니다.
+
+임의의 타입에서 어떤 `Writer` 타입으로 이어지는 사상은 함수로 표현합니다.
 
 ```
 a -> Writer b
 ```
 
-We’ll declare the composition as a funny infix operator, sometimes called the “fish”:
+합성을 정의할 때는 웃긴 이항 연산자(infix operator)를 사용할건데 보통 "fish 연산자"라고 불립니다.
 
 ```
 (>=>) :: (a -> Writer b) -> (b -> Writer c) -> (a -> Writer c)
 ```
 
-It’s a function of two arguments, each being a function on its own, and returning a function. The first argument is of the type `(a->Writer b)`, the second is `(b->Writer c)`, and the result is `(a->Writer c)`.
+이 연산자는 두 함수를 인자로 받아서 함수를 반환합니다. 첫 번째 인자는 `(a->Writer b)`이고, 두 번째는 `(b->Writer c)`, 그리고 결과는 `(a->Writer c)`입니다.
 
-Here’s the definition of this infix operator — the two arguments `m1` and `m2` appearing on either side of the fishy symbol:
+다음은 이항 연산자의 정의입니다. 물고기 기호의 양 끝에 있는 `m1`과 `m2`는 인자로 이해하시면 됩니다.
 
 ```
 m1 >=> m2 = \x ->
@@ -251,22 +254,22 @@ m1 >=> m2 = \x ->
     in (z, s1 ++ s2)
 ```
 
-The result is a lambda function of one argument `x`. The lambda is written as a backslash — think of it as the Greek letter λ with an amputated leg.
+결과는 `x` 인자의 람다 함수입니다. 람다는 백슬래쉬로 적는데, 그리스 문자인 λ의 한 쪽 다리를 잘랐다고 생각하시면 됩니다.
 
-The `let` expression lets you declare auxiliary variables. Here the result of the call to `m1` is pattern matched to a pair of variables `(y, s1)`; and the result of the call to `m2`, with the argument `y` from the first pattern, is matched to `(z, s2)`.
+`let`은 우리가 보조 변수를 선언할 수 있게 해줍니다. 여기서 `m1`을 호출한 결과는 `(y, s1)`에 해당하고, `m2`의 결과는 첫 번째 패턴의 `y`를 인자로 받아서 `(z, s2)`에 대응합니다.
 
-It is common in Haskell to pattern match pairs, rather than use accessors, as we did in C++. Other than that there is a pretty straightforward correspondence between the two implementations.
+C+에서 악세서리를 사용했던 것과는 다르게 Haskell에선 쌍을 패턴 매칭하는 방식이 일반적입니다. 그 외에도 C++과 Haskell에는 통하는 부분이 있습니다.
 
-The overall value of the `let` expression is specified in its `in` clause: here it’s a pair whose first component is `z` and the second component is the concatenation of two strings, `s1++s2`.
+`let` 표현안에 있는 모든 값은 `in` 절에서 사용할 수 있습니다. 여기서는 쌍의 첫 번째 컴포넌트가 `z`이고 두 번째 컴포넌트는 문자열을 합친 값인 `s1++s2` 입니다.
 
-I will also define the identity morphism for our category, but for reasons that will become clear much later, I will call it `return`.
+추가적으로 단위 사상을 정의해보면 다음과 같을 것입니다. 그리고 나중을 위해 이름은 `return`으로 짓겠습니다.
 
 ```
 return :: a -> Writer a
 return x = (x, "")
 ```
 
-For completeness, let’s have the Haskell versions of the embellished functions `upCase` and `toWords`:
+완성도를 위해 Haskell 버전의 embellish된 함수인 `upCase`와 `toWords`를 작성해보겠습니다.
 
 ```
 upCase :: String -> Writer String
@@ -276,24 +279,21 @@ toWords :: String -> Writer [String]
 toWords s = (words s, "toWords ")
 ```
 
-The function `map` corresponds to the C++ `transform`. It applies the character function `toUpper` to the string `s`. The auxiliary function `words` is defined in the standard Prelude library.
+`map` 함수는 C++의 `transform`과 같다고 생각하시면 됩니다. 이 함수는 문자열 `s`를 `toUpper` 함수에 넣어주는 역할을 합니다. 보조 함수인 `words`는 표준 Prelude 라이브러리에 정의돼있습니다.
 
-Finally, the composition of the two functions is accomplished with the help of the fish operator:
+마지막으로 두 함수의 합성은 물고기 연산자의 도움을 받아 다음과 같이 작성할 수 있습니다.
 
 ```
 process :: String -> Writer [String]
 process = upCase >=> toWords
 ```
 
-## Kleisli Categories
+## Kleisli 카테고리
 
-You might have guessed that I haven’t invented this category on the spot. It’s an example of the so called Kleisli category — a category based on a monad. We are not ready to discuss monads yet, but I wanted to give you a taste of what they can do. For our limited purposes, a Kleisli category has, as objects, the types of the underlying programming language. Morphisms from type A to type B are functions that go from A to a type derived from B using the particular embellishment. Each Kleisli category defines its own way of composing such morphisms, as well as the identity morphisms with respect to that composition. (Later we’ll see that the imprecise term “embellishment” corresponds to the notion of an endofunctor in a category.)
+이 카테고리를 여기서 바로 만들었을거라고 생각하시는 분은 없을 것입니다. 앞에서 설명한 내용은 모나드에 기반한 카테고리인 Kleisli 카테고리의 예시입니다. 저희는 아직 모나드에 대해 토론할 준비가 되진 않았지만, 저는 여러분에게 그들이 무엇을 할 수 있는지 살짝 맛을 보여드리고 싶었습니다.
+Kleisli 카테고리는 주어진 프로그래밍 언어의 타입을 제한된 목적의 객체로서 가지고 있습니다. 타입 A에서 타입 B로 가는 사상은 특정 embellishment를 사용해서 타입 A에서 타입 B로부터 나온 어떤 타입으로 가는 함수가 될 수 있습니다. 각 Kleisli 카테고리는 어떤 사상들을 합성하는 각자의 방식이 정의되어 있으며, 단위 사상또한 그 합성 방식을 따릅니다. (애매모호한 표현인 "embellishment"는 추후에 카테고리의 endofunctor라는 개념으로 대응될 것입니다)
 
-The particular monad that I used as the basis of the category in this post is called the writer monad and it’s used for logging or tracing the execution of functions. It’s also an example of a more general mechanism for embedding effects in pure computations. You’ve seen previously that we could model programming-language types and functions in the category of sets (disregarding bottoms, as usual). Here we have extended this model to a slightly different category, a category where morphisms are represented by embellished functions, and their composition does more than just pass the output of one function to the input of another. We have one more degree of freedom to play with: the composition itself. It turns out that this is exactly the degree of freedom which makes it possible to give simple denotational semantics to programs that in imperative languages are traditionally implemented using side effects.
-
-## Acknowledgments
-
-I’m grateful to Eric Niebler for reading the draft and providing the clever implementation of `compose` that uses advanced features of C++14 to drive type inference. I was able to cut the whole section of old fashioned template magic that did the same thing using type traits. Good riddance! I’m also grateful to Gershom Bazerman for useful comments that helped me clarify some important points.
+이 글에서 카테고리의 기초로 사용했던 모나드는 Writer 모나드라 부르며 함수의 실행이나 로깅에 사용되었습니다. 또한 순수 계산에 이펙트를 붙이는 일반적인 상황에서 많이 사용됩니다. 프로그래밍 언어의 타입과 함수를 집합의 카테고리로 모델링할 수 있다는 것은 이전에도 보셨을 것입니다. 오늘은 그러한 모델을 사상이 embellish된 함수로 표현되고 합성이 입력된 값을 다른 곳으로 보내는 것 이상의 일을 하는 약간은 다른 카테고리로 확장시켜보았습니다. 그리고 우리는 전통적인 명령형 언어에선 사이드 이펙트를 사용해야 했던 내용을 프로그램에 간단한 표시를 넘기는 것만으로 가능하게 하는 한 단계 높은 차원의 작업을 할 수 있게 되었습니다.
 
 다음: [Product와 Coproduct](/contents/part1/product-and-coproduct.md)
 
