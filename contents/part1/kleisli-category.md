@@ -3,7 +3,7 @@
 
 ---
 
-> 이 글은 프로그래머를 위한 카테고리 이론이라는 책의 일부입니다. 이전 글은 [다양한 종류의 카테고리](/contents/part1/categories-great-and-small.md) 입니다. 목차는 [여기서](/README.md) 확인하실 수 있습니다.
+> 이 글은 프로그래머를 위한 카테고리 이론이라는 책의 일부입니다. 이전 글은 [다양한 종류의 카테고리](/contents/part1/categories-great-and-small.md)입니다. 목차는 [여기서](/README.md) 확인하실 수 있습니다.
 
 ## 로그의 합성
 
